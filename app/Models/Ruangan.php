@@ -9,7 +9,7 @@ class Ruangan extends Model
 {
     use HasFactory;
 
-    protected $table = 'ruangan';
+    protected $table = 'ruangan'; // nama tabel di database
 
     protected $fillable = [
         'kode_ruangan',
@@ -18,4 +18,3 @@ class Ruangan extends Model
         'status'
     ];
 }
-

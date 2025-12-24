@@ -1,25 +1,65 @@
-@extends('app')
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - BookClass</title>
+    @include('styles.login') <!-- Jika ingin pisahkan CSS -->
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="brand-logo">BOOKCLASS</div>
+            <h2 class="login-title">Login</h2>
+            <p class="login-subtitle">Masuk ke akun Anda</p>
 
-@section('title', 'Login')
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="Masukkan email Anda">
+                </div>
 
-@section('content')
-<div class="row justify-content-center">
-    <div class="col-md-4">
-        <h4 class="text-center mb-3">Login</h4>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" placeholder="Masukkan password Anda">
+                </div>
 
-        <form>
-            <div class="mb-3">
-                <label>Email</label>
-                <input type="email" class="form-control">
+                <div class="remember-forgot">
+                    <label class="remember-me">
+                        <input type="checkbox">
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-password">Forgot your password?</a>
+                </div>
+
+                <button type="submit" class="login-btn">LOG IN</button>
+            </form>
+
+            <div class="login-footer">
+                &copy; 2024 BookClass. All rights reserved.
             </div>
-
-            <div class="mb-3">
-                <label>Password</label>
-                <input type="password" class="form-control">
-            </div>
-
-            <button class="btn btn-primary w-100">Login</button>
-        </form>
+        </div>
     </div>
-</div>
-@endsection
+</body>
+</html>
+
+<style>
+/* Copy semua CSS dari kode pertama di sini */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ... dan seterusnya (salin semua CSS di sini) ... */
+</style>
