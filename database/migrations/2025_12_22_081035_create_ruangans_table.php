@@ -11,22 +11,26 @@ return new class extends Migration
      */
     public function up(): void
 {
-    Schema::create('ruangan', function (Blueprint $table) {
-        $table->id();
-        $table->string('kode_ruangan', 20);
-        $table->string('nama_ruangan', 100);
-        $table->integer('kapasitas');
-        $table->enum('status', ['kosong', 'digunakan', 'dibooking'])->default('kosong');
-        $table->timestamps();
-    });
+    if (!Schema::hasTable('ruangan')) {
+        Schema::create('ruangan', function (Blueprint $table) {
+            $table->id();
+            $table->string('kode_ruangan', 20);
+            $table->string('nama_ruangan', 100);
+            $table->integer('kapasitas');
+            $table->enum('status', ['kosong', 'digunakan', 'dibooking'])->default('kosong');
+            $table->timestamps();
+        });
+    }
 }
+
 
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
-    {
-        Schema::dropIfExists('ruangans');
-    }
+{
+    Schema::dropIfExists('ruangan');
+}
+
 };

@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Ruangan extends Model
 {
-    use HasFactory;
+    protected $table = 'ruangan';   // ← penting
+    protected $primaryKey = 'id';
 
-    protected $table = 'ruangan';
+    public $timestamps = true;
 
     protected $fillable = [
         'kode_ruangan',
@@ -18,4 +18,3 @@ class Ruangan extends Model
         'status'
     ];
 }
-
