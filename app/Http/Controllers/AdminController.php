@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    // DASHBOARD ADMIN =================================
+    // ================= DASHBOARD ADMIN =================
     public function dashboard()
     {
         return view('admin.dashboard', [
@@ -20,12 +20,13 @@ class AdminController extends Controller
         ]);
     }
 
-    // BOOKING ADMIN ACTION ============================
+    // ================= BOOKING ACTION =================
     public function approveBooking($id)
     {
         $booking = Booking::findOrFail($id);
         $booking->update(['status' => 'diterima']);
         $booking->ruangan->update(['status' => 'dibooking']);
+
         return back()->with('success', 'Booking diterima.');
     }
 
@@ -34,6 +35,7 @@ class AdminController extends Controller
         $booking = Booking::findOrFail($id);
         $booking->update(['status' => 'ditolak']);
         $booking->ruangan->update(['status' => 'kosong']);
+
         return back()->with('success', 'Booking ditolak.');
     }
 
@@ -42,10 +44,26 @@ class AdminController extends Controller
         $booking = Booking::findOrFail($id);
         $booking->update(['status' => 'selesai']);
         $booking->ruangan->update(['status' => 'kosong']);
+
         return back()->with('success', 'Kegiatan selesai.');
     }
 
-    // CRUD RUANGAN ====================================
+    // ✅ DELETE BOOKING (TAMBAHAN)
+    public function deleteBooking($id)
+    {
+        $booking = Booking::findOrFail($id);
+
+        // kembalikan status ruangan jika ada
+        if ($booking->ruangan) {
+            $booking->ruangan->update(['status' => 'kosong']);
+        }
+
+        $booking->delete();
+
+        return back()->with('success', 'Booking berhasil dihapus.');
+    }
+
+    // ================= CRUD RUANGAN =================
     public function ruanganIndex()
     {
         return view('admin.ruangan', [
@@ -63,6 +81,7 @@ class AdminController extends Controller
         ]);
 
         Ruangan::create($request->all());
+
         return back()->with('success', 'Ruangan berhasil ditambahkan!');
     }
 
@@ -70,12 +89,14 @@ class AdminController extends Controller
     {
         $ruangan = Ruangan::findOrFail($id);
         $ruangan->update($request->all());
+
         return back()->with('success', 'Data ruangan berhasil diperbarui!');
     }
 
     public function deleteRuangan($id)
     {
         Ruangan::findOrFail($id)->delete();
+
         return back()->with('success', 'Ruangan berhasil dihapus!');
     }
 }

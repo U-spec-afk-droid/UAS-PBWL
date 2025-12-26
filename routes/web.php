@@ -13,36 +13,53 @@ Route::get('/', function () {
 
 // ==================== ADMIN AREA ====================
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+    Route::get('/admin', [AdminController::class, 'dashboard'])
+        ->name('admin.dashboard');
 
     // Booking admin
-    Route::post('/admin/booking/{id}/approve', [AdminController::class, 'approveBooking'])->name('admin.booking.approve');
-    Route::post('/admin/booking/{id}/reject', [AdminController::class, 'rejectBooking'])->name('admin.booking.reject');
-    Route::post('/admin/booking/{id}/complete', [AdminController::class, 'completeBooking'])->name('admin.booking.complete');
+    Route::post('/admin/booking/{id}/approve', [AdminController::class, 'approveBooking'])
+        ->name('admin.booking.approve');
+
+    Route::post('/admin/booking/{id}/reject', [AdminController::class, 'rejectBooking'])
+        ->name('admin.booking.reject');
+
+    Route::post('/admin/booking/{id}/complete', [AdminController::class, 'completeBooking'])
+        ->name('admin.booking.complete');
+
+    // ✅ DELETE BOOKING
+    Route::delete('/admin/booking/{id}', [AdminController::class, 'deleteBooking'])
+        ->name('admin.booking.delete');
 
     // Ruangan admin
-    Route::get('/admin/ruangan', [AdminController::class, 'ruanganIndex'])->name('admin.ruangan');
-    Route::post('/admin/ruangan/store', [AdminController::class, 'storeRuangan'])->name('admin.ruangan.store');
-    Route::post('/admin/ruangan/{id}/update', [AdminController::class, 'updateRuangan'])->name('admin.ruangan.update');
-    Route::delete('/admin/ruangan/{id}', [AdminController::class, 'deleteRuangan'])->name('admin.ruangan.delete');
+    Route::get('/admin/ruangan', [AdminController::class, 'ruanganIndex'])
+        ->name('admin.ruangan');
+
+    Route::post('/admin/ruangan/store', [AdminController::class, 'storeRuangan'])
+        ->name('admin.ruangan.store');
+
+    Route::post('/admin/ruangan/{id}/update', [AdminController::class, 'updateRuangan'])
+        ->name('admin.ruangan.update');
+
+    Route::delete('/admin/ruangan/{id}', [AdminController::class, 'deleteRuangan'])
+        ->name('admin.ruangan.delete');
 });
 
 // ==================== USER AREA ====================
 Route::middleware(['auth'])->group(function () {
 
-    // Dashboard
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-    // Informasi Kelas
     Route::get('/user/infokelas', [RuanganController::class, 'index'])->name('user.infokelas');
 
-    // Booking Kelas
     Route::get('/user/bookingclass', [BookingController::class, 'create'])->name('user.bookingclass');
+
     Route::post('/user/booking', [BookingController::class, 'store'])->name('user.booking.store');
 
-    // Riwayat Booking
     Route::get('/user/riwayatbooking', [BookingController::class, 'riwayat'])->name('user.booking.riwayat');
-    Route::delete('/user/booking/{id}/cancel', [BookingController::class, 'cancel'])->name('user.booking.cancel');
+
+    Route::delete('/user/booking/{id}/cancel', [BookingController::class, 'cancel'])
+        ->name('user.booking.cancel');
 });
 
 // Auth routes
