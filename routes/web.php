@@ -64,3 +64,4 @@ Route::middleware(['auth'])->group(function () {
 
 // Auth routes
 require __DIR__.'/auth.php';
+
